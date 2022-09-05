@@ -1,10 +1,10 @@
 # Vertex AI Enviroment Setup 
 ## Creat New GCP project
-![](img/Screen Shot 2022-09-05 at 4.49.19 PM.png)
+![](img/newproject.png)
 ## Create New Notebook in Vertex AI Workbench
 * Tensorflow Enterprise > `Tensorflow Enterprise 2.3 > Without GPUs`
 * Provide: name, `region = us-central1`, `machine type = n1-standard-4`
-![](img/Screen Shot 2022-09-05 at 4.51.50 PM.png)
+![](img/newnotebook.png)
 ---
 ## Set Up
 * `PROJECT_ID = 'znguyen'`
@@ -15,10 +15,10 @@
 
 ---
 ## Create Storage Bucket
-![](img/Screen Shot 2022-09-05 at 5.03.38 PM.png)
+![](img/newbucket.png)
 
 ---
 ## Store Project Data in the Storage Bucket
 - export from bigquery table to GCS bucket as CSV
     - the table is referenced in the `BQ_SOURCE` variable at the top of this notebook
-![](img/Screen Shot 2022-09-05 at 5.07.25 PM.png)
+![](img/datainbucket.png)
