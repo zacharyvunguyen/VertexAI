@@ -56,3 +56,17 @@ job_config = bigquery.LoadJobConfig(
 job = bq.load_table_from_uri(f"gs://{BUCKET}/{DATANAME}/data/{DATANAME}.csv", destination, job_config = job_config)
 job.result()
 ```
+
+## Prepare Data for Analysis
+Create a prepped version of the data with test/train splits using SQL DDL:
+```sql
+CREATE OR REPLACE TABLE `{DATANAME}.{DATANAME}_prepped` AS
+WITH add_id AS(SELECT *, GENERATE_UUID() transaction_id FROM `{DATANAME}.{DATANAME}`)
+SELECT *,
+    CASE 
+        WHEN MOD(ABS(FARM_FINGERPRINT(transaction_id)),10) < 8 THEN "TRAIN" 
+        WHEN MOD(ABS(FARM_FINGERPRINT(transaction_id)),10) < 9 THEN "VALIDATE"
+        ELSE "TEST"
+    END AS splits
+FROM add_id
+```
