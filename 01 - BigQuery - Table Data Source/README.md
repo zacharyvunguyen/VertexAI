@@ -44,6 +44,7 @@ ds.location = REGION
 ds.labels = {'notebook': f"{NOTEBOOK}"}
 ds = bq.create_dataset(dataset = ds, exists_ok = True)
 ```
+![](img/dataset.png)
 ## Create Table
 ```python
 destination = bigquery.TableReference.from_string(f"{PROJECT_ID}.{DATANAME}.{DATANAME}")
@@ -56,7 +57,7 @@ job_config = bigquery.LoadJobConfig(
 job = bq.load_table_from_uri(f"gs://{BUCKET}/{DATANAME}/data/{DATANAME}.csv", destination, job_config = job_config)
 job.result()
 ```
-
+![](img/table.png)
 ## Prepare Data for Analysis
 Create a prepped version of the data with test/train splits using SQL DDL:
 ```sql
@@ -70,3 +71,4 @@ SELECT *,
     END AS splits
 FROM add_id
 ```
+![](img/table_prep.png)
